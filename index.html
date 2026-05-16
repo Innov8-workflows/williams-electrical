@@ -292,13 +292,22 @@ section { position: relative; }
 .angle-top.angle-bone { background: var(--bone); }
 .reviews-inner { max-width: 1180px; margin: 0 auto; text-align: center; position: relative; z-index: 1; }
 .reviews-eyebrow {
-  display: inline-flex; align-items: center; gap: 10px; color: rgba(255,255,255,0.85);
-  font-size: 0.78rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase;
+  display: inline-flex; align-items: center; gap: 12px; color: rgba(255,255,255,0.92);
+  font-size: 0.82rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
   margin-bottom: 14px;
 }
 .reviews-eyebrow::before, .reviews-eyebrow::after {
-  content: ''; width: 24px; height: 1px; background: rgba(255,255,255,0.5);
+  content: ''; width: 28px; height: 1px; background: rgba(255,255,255,0.5);
 }
+.google-g {
+  width: 22px; height: 22px; flex-shrink: 0;
+  background: #fff; border-radius: 50%; padding: 2px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.18);
+}
+.google-stars { display: inline-flex; align-items: center; gap: 2px; }
+.google-star { width: 18px; height: 18px; flex-shrink: 0; }
+.reviews-rating .google-star { width: 20px; height: 20px; }
+.review-tile .google-stars { justify-content: center; }
 .reviews-title {
   font-family: var(--font-display); font-weight: 400; font-style: italic;
   font-size: clamp(1.8rem, 3.5vw, 2.6rem); line-height: 1.2; margin-bottom: 12px;
@@ -831,10 +840,19 @@ section { position: relative; }
 <section id="reviews">
   <div class="angle-top angle-bone"></div>
   <div class="reviews-inner">
-    <div class="reviews-eyebrow">Customer Reviews</div>
+    <div class="reviews-eyebrow">
+      <svg class="google-g" viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"/><path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"/><path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"/><path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"/></svg>
+      Google Reviews
+    </div>
     <h2 class="reviews-title">"Genuinely impressive — same day, sorted within an hour."</h2>
     <div class="reviews-rating">
-      <span class="stars">★★★★★</span>
+      <span class="google-stars" aria-label="5 out of 5">
+        <svg class="google-star" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FBBC04" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg class="google-star" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FBBC04" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg class="google-star" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FBBC04" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg class="google-star" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FBBC04" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg class="google-star" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FBBC04" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      </span>
       <strong>5.0</strong>
       <span>·</span>
       <span>32 Google Reviews</span>
@@ -843,22 +861,46 @@ section { position: relative; }
       <div class="review-tile">
         <div class="review-name">Sarah J.</div>
         <p class="review-quote">Alfie did an outstanding job replacing our consumer unit. Professional, tidy and explained everything clearly.</p>
-        <div class="stars">★★★★★</div>
+        <span class="google-stars" aria-label="5 out of 5">
+          <svg class="google-star" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FBBC04" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="google-star" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FBBC04" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="google-star" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FBBC04" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="google-star" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FBBC04" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="google-star" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FBBC04" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </span>
       </div>
       <div class="review-tile">
         <div class="review-name">Mark T.</div>
         <p class="review-quote">Brilliant service from start to finish — on time, reasonable pricing and the work was first class.</p>
-        <div class="stars">★★★★★</div>
+        <span class="google-stars" aria-label="5 out of 5">
+          <svg class="google-star" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FBBC04" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="google-star" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FBBC04" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="google-star" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FBBC04" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="google-star" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FBBC04" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="google-star" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FBBC04" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </span>
       </div>
       <div class="review-tile">
         <div class="review-name">Claire R.</div>
         <p class="review-quote">Came out same day, diagnosed the fault within minutes and had it fixed within the hour. Lifesaver.</p>
-        <div class="stars">★★★★★</div>
+        <span class="google-stars" aria-label="5 out of 5">
+          <svg class="google-star" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FBBC04" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="google-star" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FBBC04" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="google-star" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FBBC04" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="google-star" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FBBC04" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="google-star" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FBBC04" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </span>
       </div>
       <div class="review-tile">
         <div class="review-name">David H.</div>
         <p class="review-quote">Expert work and honest service — exactly as advertised. Will be using again without a doubt.</p>
-        <div class="stars">★★★★★</div>
+        <span class="google-stars" aria-label="5 out of 5">
+          <svg class="google-star" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FBBC04" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="google-star" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FBBC04" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="google-star" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FBBC04" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="google-star" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FBBC04" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="google-star" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FBBC04" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </span>
       </div>
     </div>
     <div class="reviews-cta">
