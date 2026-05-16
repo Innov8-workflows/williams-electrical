@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://williams-electric.co.uk/sitemap.xml
