@@ -487,10 +487,6 @@ section { position: relative; }
 
 
 /* ─── BEFORE / AFTER SLIDER ─── */
-.ba-grid {
-  display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px;
-}
-.ba-grid > article:nth-child(5) { grid-column: 1 / -1; max-width: 720px; justify-self: center; }
 .ba-slider {
   position: relative; aspect-ratio: 3/2; border-radius: 18px; overflow: hidden;
   background: var(--sage-pale); box-shadow: var(--shadow-sm);
@@ -552,11 +548,59 @@ section { position: relative; }
 }
 @media (max-width: 720px) {
   .ba-grid { grid-template-columns: 1fr; gap: 18px; }
-  .ba-grid > article:nth-child(5) { max-width: none; }
   .ba-caption h4 { font-size: 1.05rem; }
   .ba-caption p { font-size: 0.78rem; }
   .ba-handle-dot { width: 38px; height: 38px; }
   .ba-tag { font-size: 0.62rem; padding: 5px 10px; }
+}
+
+
+/* ─── BEFORE / AFTER GRID (3-col on desktop, 2 on tablet, 1 on mobile) ─── */
+.ba-grid { grid-template-columns: repeat(3, 1fr); gap: 22px; }
+@media (max-width: 960px) {
+  .ba-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .ba-grid { grid-template-columns: 1fr; gap: 18px; }
+}
+
+/* ─── RECENT INSTALLATIONS GALLERY ─── */
+.gallery-grid {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 18px;
+}
+.gallery-tile {
+  position: relative; flex: 1 1 calc(33.333% - 12px);
+  min-width: 280px; max-width: 380px; aspect-ratio: 4/3;
+  border-radius: 14px; overflow: hidden;
+  box-shadow: var(--shadow-sm); transition: transform 0.3s, box-shadow 0.3s;
+  text-decoration: none; color: var(--bone);
+}
+.gallery-tile:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+.gallery-tile img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  transition: transform 0.5s ease;
+}
+.gallery-tile:hover img { transform: scale(1.06); }
+.gallery-tile::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(20,28,22,0.82) 0%, rgba(20,28,22,0.35) 45%, transparent 70%);
+}
+.gallery-tile-label {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 18px 20px 16px; z-index: 1;
+}
+.gallery-tile-label h4 {
+  font-family: var(--font-display); font-weight: 500; font-size: 1.08rem;
+  margin-bottom: 3px; line-height: 1.25;
+}
+.gallery-tile-label span {
+  font-size: 0.8rem; opacity: 0.85; line-height: 1.4; display: block;
+}
+@media (max-width: 720px) {
+  .gallery-grid { gap: 14px; }
+  .gallery-tile { flex: 1 1 calc(50% - 7px); min-width: 0; }
+  .gallery-tile-label h4 { font-size: 0.95rem; }
+  .gallery-tile-label span { font-size: 0.72rem; }
 }
 
 /* ─── WHY US ─── */
@@ -1150,6 +1194,70 @@ section { position: relative; }
           <p>Warwick · old board to Schneider Easy9 18-way RCBO unit</p>
         </div>
       </article>
+      <article class="ba-slider" data-pos="50">
+        <img src="assets/img/ba/6-after.jpg" alt="After: Exterior Facade Lighting in New-build" class="ba-img ba-after" loading="lazy">
+        <img src="assets/img/ba/6-before.jpg" alt="Before: existing facade prior to exterior facade lighting" class="ba-img ba-before" loading="lazy">
+        <span class="ba-tag ba-tag-before">Before</span>
+        <span class="ba-tag ba-tag-after">After</span>
+        <div class="ba-handle" tabindex="0" role="slider" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" aria-label="Drag to reveal before and after: Exterior Facade Lighting">
+          <span class="ba-handle-line"></span>
+          <span class="ba-handle-dot">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 3 12 9 18"/><polyline points="15 6 21 12 15 18"/></svg>
+          </span>
+        </div>
+        <div class="ba-caption">
+          <h4>Exterior Facade Lighting</h4>
+          <p>New-build · soffit downlights, wall up/down lights & feature uplighting</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ─── RECENT INSTALLATIONS GALLERY ─── -->
+<section id="gallery">
+  <div class="section-inner" style="padding-top: 30px;">
+    <div class="work-header">
+      <div class="eyebrow">Recent Installations</div>
+      <h2 class="section-title">Highlights from the <em>last few months</em>.</h2>
+      <p class="section-sub">A snapshot of recent jobs across Warwick and Warwickshire — outdoor lighting, kitchen schemes, security, staircase features.</p>
+    </div>
+    <div class="gallery-grid">
+      <a href="contact.html" class="gallery-tile" aria-label="Garden Lighting Design: Pergola feature lights, fence uplights & low-glow ground markers">
+        <img src="assets/img/gallery/job-1.jpg" alt="Garden Lighting Design — Pergola feature lights, fence uplights & low-glow ground markers" loading="lazy">
+        <div class="gallery-tile-label">
+          <h4>Garden Lighting Design</h4>
+          <span>Pergola feature lights, fence uplights & low-glow ground markers</span>
+        </div>
+      </a>
+      <a href="contact.html" class="gallery-tile" aria-label="Driveway & Exterior Lighting: Wall up/down lights + uplit shrubs and pathway">
+        <img src="assets/img/gallery/job-2.jpg" alt="Driveway & Exterior Lighting — Wall up/down lights + uplit shrubs and pathway" loading="lazy">
+        <div class="gallery-tile-label">
+          <h4>Driveway & Exterior Lighting</h4>
+          <span>Wall up/down lights + uplit shrubs and pathway</span>
+        </div>
+      </a>
+      <a href="contact.html" class="gallery-tile" aria-label="Kitchen LED Downlights: Full recessed downlight scheme with under-cabinet strip">
+        <img src="assets/img/gallery/job-3.jpg" alt="Kitchen LED Downlights — Full recessed downlight scheme with under-cabinet strip" loading="lazy">
+        <div class="gallery-tile-label">
+          <h4>Kitchen LED Downlights</h4>
+          <span>Full recessed downlight scheme with under-cabinet strip</span>
+        </div>
+      </a>
+      <a href="contact.html" class="gallery-tile" aria-label="CCTV & Security Cameras: IP-rated wired install with concealed cable run">
+        <img src="assets/img/gallery/job-4.jpg" alt="CCTV & Security Cameras — IP-rated wired install with concealed cable run" loading="lazy">
+        <div class="gallery-tile-label">
+          <h4>CCTV & Security Cameras</h4>
+          <span>IP-rated wired install with concealed cable run</span>
+        </div>
+      </a>
+      <a href="contact.html" class="gallery-tile" aria-label="Staircase Step Lighting: Recessed riser lights with warm-white LED strip">
+        <img src="assets/img/gallery/job-5.jpg" alt="Staircase Step Lighting — Recessed riser lights with warm-white LED strip" loading="lazy">
+        <div class="gallery-tile-label">
+          <h4>Staircase Step Lighting</h4>
+          <span>Recessed riser lights with warm-white LED strip</span>
+        </div>
+      </a>
     </div>
   </div>
 </section>
