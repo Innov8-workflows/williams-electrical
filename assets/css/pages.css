@@ -303,6 +303,43 @@ section { position: relative; }
   font-size: 0.82rem; color: rgba(255,255,255,0.5); flex-wrap: wrap; gap: 12px;
 }
 
+/* ─── COOKIE BANNER ─── */
+.cookie-banner {
+  position: fixed; left: 16px; right: 16px; bottom: 16px; z-index: 9999;
+  max-width: 720px; margin: 0 auto;
+  background: var(--charcoal); color: rgba(255,255,255,0.9);
+  border-radius: 14px; padding: 16px 20px;
+  display: flex; align-items: center; gap: 18px; flex-wrap: wrap;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+  font-size: 0.88rem; line-height: 1.45;
+}
+.cookie-banner p { margin: 0; flex: 1 1 200px; min-width: 0; }
+.cookie-banner a { color: var(--gold-soft); text-decoration: underline; text-underline-offset: 3px; }
+.cookie-banner a:hover { color: var(--bone); }
+.cookie-btn {
+  background: var(--bone); color: var(--sage-deeper);
+  border: none; padding: 10px 22px; border-radius: var(--radius-pill);
+  font-family: var(--font-body); font-weight: 600; font-size: 0.88rem;
+  cursor: pointer; transition: background 0.2s, transform 0.15s;
+  flex-shrink: 0;
+}
+.cookie-btn:hover { background: var(--gold-soft); transform: translateY(-1px); }
+@media (max-width: 540px) {
+  .cookie-banner { padding: 14px 16px; font-size: 0.82rem; }
+  .cookie-btn { width: 100%; }
+}
+
+/* ─── FOOTER POLICY LINKS ─── */
+.footer-policies {
+  display: flex; gap: 8px; flex-wrap: wrap; align-items: center;
+  font-size: 0.82rem;
+}
+.footer-policies a {
+  color: rgba(255,255,255,0.65); transition: color 0.2s;
+}
+.footer-policies a:hover { color: var(--gold-soft); }
+.footer-policies span { color: rgba(255,255,255,0.3); }
+
 /* ─── FLOATING ACTIONS ─── */
 .float-actions {
   position: fixed; right: 22px; bottom: 22px; z-index: 999;

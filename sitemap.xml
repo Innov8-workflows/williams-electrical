@@ -24,4 +24,6 @@
   <url><loc>https://williams-electric.co.uk/areas/wellesbourne.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://williams-electric.co.uk/areas/bishops-tachbrook.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://williams-electric.co.uk/areas/budbrooke.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://williams-electric.co.uk/privacy.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://williams-electric.co.uk/cookies.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
 </urlset>
