@@ -313,6 +313,7 @@ section { position: relative; }
   box-shadow: 0 12px 40px rgba(0,0,0,0.35);
   font-size: 0.88rem; line-height: 1.45;
 }
+.cookie-banner[hidden] { display: none !important; }
 .cookie-banner p { margin: 0; flex: 1 1 200px; min-width: 0; }
 .cookie-banner a { color: var(--gold-soft); text-decoration: underline; text-underline-offset: 3px; }
 .cookie-banner a:hover { color: var(--bone); }

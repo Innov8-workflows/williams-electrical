@@ -402,7 +402,8 @@ function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('
 function toggleFaq(btn) { btn.parentElement.classList.toggle('open'); }
 function acceptCookies() {
   try { localStorage.setItem('we-cookies-ok', '1'); } catch(e) {}
-  document.getElementById('cookie-banner').hidden = true;
+  var b = document.getElementById('cookie-banner');
+  if (b) { b.hidden = true; b.style.display = 'none'; }
 }
 (function() {
   try {
