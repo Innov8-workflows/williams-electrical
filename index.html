@@ -767,13 +767,24 @@ section { position: relative; }
   letter-spacing: 0.04em;
 }
 .form-field input, .form-field select, .form-field textarea {
-  font-family: var(--font-body); padding: 12px 14px;
-  border: 1px solid var(--line); border-radius: 10px;
+  font-family: var(--font-body); padding: 13px 14px;
+  border: 1.5px solid var(--sage-pale); border-radius: 10px;
   background: var(--cream-soft); font-size: 0.95rem; color: var(--charcoal);
-  transition: border-color 0.2s, background 0.2s;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+  width: 100%;
+}
+.form-field input::placeholder, .form-field textarea::placeholder { color: rgba(123,133,121,0.7); }
+.form-field input:hover, .form-field select:hover, .form-field textarea:hover { border-color: var(--sage); }
+.form-field input:-webkit-autofill,
+.form-field input:-webkit-autofill:hover,
+.form-field input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 30px var(--cream-soft) inset !important;
+  -webkit-text-fill-color: var(--charcoal) !important;
+  caret-color: var(--charcoal);
 }
 .form-field input:focus, .form-field select:focus, .form-field textarea:focus {
-  outline: none; border-color: var(--sage); background: var(--bone);
+  outline: none; border-color: var(--sage-dark); background: var(--bone);
+  box-shadow: 0 0 0 3px rgba(138, 163, 142, 0.18);
 }
 .form-field textarea { resize: vertical; min-height: 110px; font-family: var(--font-body); }
 .form-single { margin-bottom: 14px; }
