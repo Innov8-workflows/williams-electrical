@@ -303,6 +303,142 @@ section { position: relative; }
   font-size: 0.82rem; color: rgba(255,255,255,0.5); flex-wrap: wrap; gap: 12px;
 }
 
+/* ─── FEATURED CASE STUDIES (work page) ─── */
+.case-study {
+  display: grid; grid-template-columns: 1.1fr 1fr; gap: 48px; align-items: center;
+  margin-bottom: 80px;
+}
+.case-study.case-study-reverse { grid-template-columns: 1fr 1.1fr; }
+.case-study.case-study-reverse .case-study-body { order: -1; }
+.case-study-photos-double {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+}
+.case-study-photos-single { display: block; }
+.case-study-photos figure {
+  position: relative; border-radius: 14px; overflow: hidden;
+  box-shadow: var(--shadow); background: var(--sage-pale);
+  aspect-ratio: 3/2;
+}
+.case-study-photos figure img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+}
+.case-study-photos figcaption {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  padding: 10px 14px;
+  color: var(--bone); font-size: 0.78rem; font-weight: 500; letter-spacing: 0.03em;
+  background: linear-gradient(to top, rgba(20,28,22,0.82) 0%, rgba(20,28,22,0.3) 70%, transparent 100%);
+}
+.case-study-body { padding: 4px 0; }
+.case-study-meta {
+  display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px;
+}
+.case-chip {
+  font-family: var(--font-body); font-size: 0.74rem; font-weight: 500;
+  letter-spacing: 0.04em; padding: 5px 12px; border-radius: var(--radius-pill);
+  background: var(--cream); border: 1px solid var(--line); color: var(--charcoal);
+}
+.case-chip-service { background: var(--sage-pale); border-color: var(--sage); color: var(--sage-deeper); }
+.case-study-body h3 {
+  font-family: var(--font-display); font-weight: 500;
+  font-size: clamp(1.35rem, 2.6vw, 1.75rem); line-height: 1.2;
+  color: var(--charcoal); margin-bottom: 16px;
+}
+.case-study-body p {
+  font-size: 1rem; color: var(--charcoal); line-height: 1.75; margin-bottom: 14px;
+}
+.case-study-body p strong { color: var(--sage-deeper); font-weight: 600; }
+
+@media (max-width: 880px) {
+  .case-study, .case-study.case-study-reverse {
+    grid-template-columns: 1fr; gap: 28px; margin-bottom: 60px;
+  }
+  .case-study.case-study-reverse .case-study-body { order: 0; }
+}
+
+/* Reuse work-page BA + gallery grids — these classes are defined inline on the
+   homepage but the work page links to pages.css, so duplicate the key rules: */
+.ba-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px;
+}
+.ba-slider {
+  position: relative; aspect-ratio: 3/2; border-radius: 18px; overflow: hidden;
+  background: var(--sage-pale); box-shadow: var(--shadow-sm);
+  --pos: 50%; user-select: none; touch-action: none; cursor: ew-resize;
+}
+.ba-slider:hover { box-shadow: var(--shadow); }
+.ba-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; }
+.ba-after { z-index: 1; }
+.ba-before { z-index: 2; clip-path: inset(0 calc(100% - var(--pos)) 0 0); }
+.ba-tag {
+  position: absolute; top: 14px; z-index: 4;
+  font-family: var(--font-body); font-size: 0.7rem; font-weight: 600;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 6px 12px; border-radius: 4px;
+  background: rgba(20, 28, 22, 0.72); color: var(--bone);
+  backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+}
+.ba-tag-before { left: 14px; }
+.ba-tag-after  { right: 14px; }
+.ba-handle {
+  position: absolute; top: 0; bottom: 0; z-index: 5;
+  left: var(--pos); transform: translateX(-50%);
+  width: 44px; display: flex; align-items: center; justify-content: center;
+  cursor: ew-resize; touch-action: none;
+}
+.ba-handle-line {
+  position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; margin-left: -1px;
+  background: rgba(255, 255, 255, 0.95); box-shadow: 0 0 10px rgba(0,0,0,0.4);
+}
+.ba-handle-dot {
+  position: relative; z-index: 1;
+  width: 44px; height: 44px; border-radius: 50%;
+  background: var(--bone); color: var(--sage-deeper);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+}
+.ba-handle-dot svg { width: 18px; height: 18px; }
+.ba-caption {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 3;
+  padding: 18px 22px 16px; color: var(--bone);
+  background: linear-gradient(to top, rgba(20,28,22,0.78) 0%, rgba(20,28,22,0.4) 60%, transparent 100%);
+  pointer-events: none;
+}
+.ba-caption h4 { font-family: var(--font-display); font-weight: 500; font-size: 1.18rem; margin-bottom: 2px; line-height: 1.25; }
+.ba-caption p { font-size: 0.85rem; opacity: 0.85; line-height: 1.4; }
+.gallery-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 18px; }
+.gallery-tile {
+  position: relative; flex: 1 1 calc(33.333% - 12px);
+  min-width: 280px; max-width: 380px; aspect-ratio: 4/3;
+  border-radius: 14px; overflow: hidden;
+  box-shadow: var(--shadow-sm); transition: transform 0.3s, box-shadow 0.3s;
+  text-decoration: none; color: var(--bone);
+}
+.gallery-tile:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+.gallery-tile img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  transition: transform 0.5s ease;
+}
+.gallery-tile:hover img { transform: scale(1.06); }
+.gallery-tile::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(20,28,22,0.82) 0%, rgba(20,28,22,0.35) 45%, transparent 70%);
+}
+.gallery-tile-label { position: absolute; bottom: 0; left: 0; right: 0; padding: 18px 20px 16px; z-index: 1; }
+.gallery-tile-label h4 { font-family: var(--font-display); font-weight: 500; font-size: 1.08rem; margin-bottom: 3px; line-height: 1.25; }
+.gallery-tile-label span { font-size: 0.8rem; opacity: 0.85; line-height: 1.4; display: block; }
+.work-header { text-align: center; margin-bottom: 42px; }
+.work-header .eyebrow { justify-content: center; }
+.work-header .eyebrow::before { display: none; }
+.work-header .section-sub { margin: 0 auto; }
+
+@media (max-width: 960px) {
+  .ba-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .ba-grid { grid-template-columns: 1fr; gap: 18px; }
+  .gallery-tile { flex: 1 1 calc(50% - 9px); min-width: 0; }
+}
+
 /* ─── COOKIE BANNER ─── */
 .cookie-banner {
   position: fixed; left: 16px; right: 16px; bottom: 16px; z-index: 9999;
