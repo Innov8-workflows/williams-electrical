@@ -592,8 +592,13 @@ section { position: relative; }
 @media (max-width: 720px) {
  .gallery-grid { gap: 14px; }
  .gallery-tile { flex: 1 1 calc(50% - 7px); min-width: 0; }
- .gallery-tile-label h4 { font-size: 0.95rem; }
- .gallery-tile-label span { font-size: 0.72rem; }
+ /* Hide caption sub-text on mobile + tighter gradient so images breathe */
+ .gallery-tile::after {
+   background: linear-gradient(to top, rgba(20,28,22,0.78) 0%, rgba(20,28,22,0.3) 30%, transparent 50%);
+ }
+ .gallery-tile-label { padding: 12px 14px; }
+ .gallery-tile-label h4 { font-size: 0.9rem; margin-bottom: 0; }
+ .gallery-tile-label span { display: none; }
 }
 
 
