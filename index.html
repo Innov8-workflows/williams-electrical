@@ -237,15 +237,15 @@ section { position: relative; }
 .hero-slide.active { opacity: 1; }
 .hero-overlay {
  position: absolute; inset: 0; z-index: 1;
- /* cream-heavy on the left for text legibility, fully transparent on the right
-  so the video shows through clearly. */
+ /* Cream-solid across the text column (left ~50%), then a quick fade
+    over a narrow band so the right-hand image still shows clearly. */
  background:
  linear-gradient(100deg,
-  rgba(247, 244, 237, 0.92) 0%,
-  rgba(247, 244, 237, 0.78) 30%,
-  rgba(247, 244, 237, 0.38) 55%,
-  rgba(247, 244, 237, 0.05) 85%,
-  rgba(247, 244, 237, 0.00) 100%);
+  rgba(247, 244, 237, 0.96) 0%,
+  rgba(247, 244, 237, 0.94) 38%,
+  rgba(247, 244, 237, 0.78) 50%,
+  rgba(247, 244, 237, 0.32) 70%,
+  rgba(247, 244, 237, 0.00) 95%);
 }
 .hero-inner {
  position: relative; z-index: 2; max-width: 1180px; width: 100%; margin: 0 auto;
