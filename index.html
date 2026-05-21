@@ -1693,123 +1693,117 @@ section { position: relative; }
 <script>
 // Sticky nav state
 const nav = document.getElementById('navbar');
-window.addEventListener('scroll',  => {
- nav.classList.toggle('scrolled', window.scrollY > 16);
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 16);
 }, { passive: true });
 
 // Mobile menu
-function toggleMenu {
- document.getElementById('mobileMenu').classList.toggle('open');
+function toggleMenu() {
+  document.getElementById('mobileMenu').classList.toggle('open');
 }
 
 // FAQ accordion
 function toggleFaq(btn) {
- const item = btn.parentElement;
- item.classList.toggle('open');
+  const item = btn.parentElement;
+  item.classList.toggle('open');
 }
 function toggleAcc(btn) {
- const item = btn.parentElement;
- const wasOpen = item.classList.contains('open');
- // close siblings
- item.parentElement.querySelectorAll('.about-acc-item.open').forEach(s => s.classList.remove('open'));
- if (!wasOpen) item.classList.add('open');
+  const item = btn.parentElement;
+  const wasOpen = item.classList.contains('open');
+  item.parentElement.querySelectorAll('.about-acc-item.open').forEach(s => s.classList.remove('open'));
+  if (!wasOpen) item.classList.add('open');
 }
 
 // Hero image slider — crossfade every 5s (opacity-only transition, safe for reduced-motion)
-(function  {
- const slides = document.querySelectorAll(".hero-slide");
- if (slides.length < 2) return;
- let i = 0;
- setInterval( => {
- slides[i].classList.remove("active");
- i = (i + 1) % slides.length;
- slides[i].classList.add("active");
- }, 5000);
-});
+(function () {
+  const slides = document.querySelectorAll(".hero-slide");
+  if (slides.length < 2) return;
+  let i = 0;
+  setInterval(() => {
+    slides[i].classList.remove("active");
+    i = (i + 1) % slides.length;
+    slides[i].classList.add("active");
+  }, 5000);
+})();
 
 // Contact form posts directly to Web3Forms via the form's action attribute
 // (no JS handler needed — visitor is redirected to /thanks.html on success)
 
 // Before/after sliders — drag/touch/keyboard
-(function  {
- const sliders = document.querySelectorAll('.ba-slider');
- sliders.forEach(slider => {
- const handle = slider.querySelector('.ba-handle');
- let dragging = false;
+(function () {
+  const sliders = document.querySelectorAll('.ba-slider');
+  sliders.forEach(slider => {
+    const handle = slider.querySelector('.ba-handle');
+    let dragging = false;
 
- const setPos = (clientX) => {
-  const rect = slider.getBoundingClientRect;
-  let pct = ((clientX - rect.left) / rect.width) * 100;
-  pct = Math.max(0, Math.min(100, pct));
-  slider.style.setProperty('--pos', pct + '%');
-  handle.setAttribute('aria-valuenow', Math.round(pct));
-  slider.dataset.pos = Math.round(pct);
- };
+    const setPos = (clientX) => {
+      const rect = slider.getBoundingClientRect();
+      let pct = ((clientX - rect.left) / rect.width) * 100;
+      pct = Math.max(0, Math.min(100, pct));
+      slider.style.setProperty('--pos', pct + '%');
+      handle.setAttribute('aria-valuenow', Math.round(pct));
+      slider.dataset.pos = Math.round(pct);
+    };
 
- // Mouse / touch start
- const start = (e) => {
-  dragging = true;
-  slider.style.cursor = 'grabbing';
-  const cx = e.touches ? e.touches[0].clientX : e.clientX;
-  setPos(cx);
-  e.preventDefault;
- };
- // Move
- const move = (e) => {
-  if (!dragging) return;
-  const cx = e.touches ? e.touches[0].clientX : e.clientX;
-  setPos(cx);
- };
- // End
- const end =  => { dragging = false; slider.style.cursor = 'ew-resize'; };
+    const start = (e) => {
+      dragging = true;
+      slider.style.cursor = 'grabbing';
+      const cx = e.touches ? e.touches[0].clientX : e.clientX;
+      setPos(cx);
+      e.preventDefault();
+    };
+    const move = (e) => {
+      if (!dragging) return;
+      const cx = e.touches ? e.touches[0].clientX : e.clientX;
+      setPos(cx);
+    };
+    const end = () => { dragging = false; slider.style.cursor = 'ew-resize'; };
 
- slider.addEventListener('mousedown', start);
- slider.addEventListener('touchstart', start, { passive: false });
- window.addEventListener('mousemove', move);
- window.addEventListener('touchmove', move, { passive: true });
- window.addEventListener('mouseup', end);
- window.addEventListener('touchend', end);
+    slider.addEventListener('mousedown', start);
+    slider.addEventListener('touchstart', start, { passive: false });
+    window.addEventListener('mousemove', move);
+    window.addEventListener('touchmove', move, { passive: true });
+    window.addEventListener('mouseup', end);
+    window.addEventListener('touchend', end);
 
- // Click anywhere on the slider to jump
- slider.addEventListener('click', (e) => {
-  if (e.target.closest('.ba-handle')) return; // handle drag manages this
-  setPos(e.clientX);
- });
+    slider.addEventListener('click', (e) => {
+      if (e.target.closest('.ba-handle')) return;
+      setPos(e.clientX);
+    });
 
- // Keyboard support
- handle.addEventListener('keydown', (e) => {
-  const cur = parseInt(slider.dataset.pos || '50', 10);
-  let next = cur;
-  if (e.key === 'ArrowLeft') next = Math.max(0, cur - 5);
-  if (e.key === 'ArrowRight') next = Math.min(100, cur + 5);
-  if (e.key === 'Home')  next = 0;
-  if (e.key === 'End')  next = 100;
-  if (next !== cur) {
-  slider.style.setProperty('--pos', next + '%');
-  slider.dataset.pos = next;
-  handle.setAttribute('aria-valuenow', next);
-  e.preventDefault;
-  }
- });
- });
-});
+    handle.addEventListener('keydown', (e) => {
+      const cur = parseInt(slider.dataset.pos || '50', 10);
+      let next = cur;
+      if (e.key === 'ArrowLeft')  next = Math.max(0, cur - 5);
+      if (e.key === 'ArrowRight') next = Math.min(100, cur + 5);
+      if (e.key === 'Home')       next = 0;
+      if (e.key === 'End')        next = 100;
+      if (next !== cur) {
+        slider.style.setProperty('--pos', next + '%');
+        slider.dataset.pos = next;
+        handle.setAttribute('aria-valuenow', next);
+        e.preventDefault();
+      }
+    });
+  });
+})();
 
 // Cookie banner (essential cookies only, dismissed via localStorage)
-function acceptCookies {
- try { localStorage.setItem('we-cookies-ok', '1'); } catch (e) {}
- var b = document.getElementById('cookie-banner');
- if (b) { b.hidden = true; b.style.display = 'none'; }
-}
-(function  {
- try {
- if (!localStorage.getItem('we-cookies-ok')) {
-  document.addEventListener('DOMContentLoaded', function  {
+function acceptCookies() {
+  try { localStorage.setItem('we-cookies-ok', '1'); } catch (e) {}
   var b = document.getElementById('cookie-banner');
-  if (b) b.hidden = false;
-  });
- }
- } catch (e) {}
-});
+  if (b) { b.hidden = true; b.style.display = 'none'; }
+}
+(function () {
+  try {
+    if (!localStorage.getItem('we-cookies-ok')) {
+      document.addEventListener('DOMContentLoaded', function () {
+        var b = document.getElementById('cookie-banner');
+        if (b) b.hidden = false;
+      });
+    }
+  } catch (e) {}
+})();
 </script>
 
 <!-- Cookie banner -->
