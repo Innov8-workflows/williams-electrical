@@ -214,52 +214,42 @@
  </article>
  <aside class="sidebar">
   
-<form class="contact-form" onsubmit="return sendEmail(event)">
+<form class="contact-form" action="https://api.web3forms.com/submit" method="POST">
+ <input type="hidden" name="access_key" value="REPLACE_WITH_WEB3FORMS_ACCESS_KEY">
+ <input type="hidden" name="subject" value="New Williams Electrical enquiry">
+ <input type="hidden" name="from_name" value="Williams Electrical Website">
+ <input type="hidden" name="redirect" value="https://williams-electric.co.uk/thanks.html">
  <h3>Send a message</h3>
- <p>Sent straight to info@williamselectric.co.uk — usually replies within a few hours.</p>
+ <p>Goes straight to Alfie at <a href="mailto:info@williamselectric.co.uk">info@williamselectric.co.uk</a> — usually replies within a few hours.</p>
  <div class="form-row">
- <div class="form-field"><label for="cf-fname">First name</label><input type="text" id="cf-fname" required></div>
- <div class="form-field"><label for="cf-lname">Last name</label><input type="text" id="cf-lname"></div>
+  <div class="form-field"><label for="cf-fname">First name</label><input type="text" id="cf-fname" name="first_name" required></div>
+  <div class="form-field"><label for="cf-lname">Last name</label><input type="text" id="cf-lname" name="last_name"></div>
  </div>
  <div class="form-row">
- <div class="form-field"><label for="cf-phone">Phone</label><input type="tel" id="cf-phone"></div>
- <div class="form-field"><label for="cf-email">Email</label><input type="email" id="cf-email"></div>
+  <div class="form-field"><label for="cf-phone">Phone</label><input type="tel" id="cf-phone" name="phone"></div>
+  <div class="form-field"><label for="cf-email">Email</label><input type="email" id="cf-email" name="email" required></div>
  </div>
  <div class="form-single">
- <div class="form-field"><label for="cf-service">Service needed</label>
-  <select id="cf-service">
-  <option value="">Select a service…</option>
-  <option>Consumer Unit Upgrades</option><option>Full & Partial Rewires</option><option>EV Charger Installation</option><option>Fault Finding & Repairs</option><option>New Sockets & Lighting</option><option>EICR & Certificates</option><option>Solar & Battery Storage</option><option>Commercial Electrical</option>
-  <option>Other</option>
-  </select>
- </div>
+  <div class="form-field"><label for="cf-service">Service needed</label>
+   <select id="cf-service" name="service">
+    <option value="">Select a service…</option>
+    <option>Consumer Unit Upgrades</option><option>Full & Partial Rewires</option><option>EV Charger Installation</option><option>Fault Finding & Repairs</option><option>New Sockets & Lighting</option><option>EICR & Certificates</option><option>Solar & Battery Storage</option><option>Commercial Electrical</option>
+    <option>Other</option>
+   </select>
+  </div>
  </div>
  <div class="form-single">
- <div class="form-field"><label for="cf-msg">Message</label><textarea id="cf-msg" placeholder="Tell Alfie about the job..."></textarea></div>
+  <div class="form-field"><label for="cf-msg">Message</label><textarea id="cf-msg" name="message" placeholder="Tell Alfie about the job..." required></textarea></div>
  </div>
- <button type="submit" class="btn-submit">Send via Email →</button>
+ <!-- Honeypot anti-spam: humans never see this, bots fill it in -->
+ <input type="checkbox" name="botcheck" style="display:none !important;" tabindex="-1" autocomplete="off">
+ <button type="submit" class="btn-submit">Send message →</button>
 </form>
-
-<script>
-function sendWhatsApp(e) {
- e.preventDefault;
- const v = id => (document.getElementById(id).value || '').trim;
- const text =
- `Hi Alfie, I'd like to enquire about electrical work.%0A%0A` +
- `*Name:* ${encodeURIComponent([v('cf-fname'), v('cf-lname')].filter(Boolean).join(' ') || '—')}%0A` +
- `*Phone:* ${encodeURIComponent(v('cf-phone') || '—')}%0A` +
- `*Email:* ${encodeURIComponent(v('cf-email') || '—')}%0A` +
- `*Service:* ${encodeURIComponent(v('cf-service') || '—')}%0A` +
- `*Message:* ${encodeURIComponent(v('cf-msg') || '—')}`;
- window.open('https://wa.me/447360528992?text=' + text, '_blank');
- return false;
-}
-</script>
  </aside>
  </div>
 </section>
 
-<function cta_final at 0x000002129E3E5620>
+<function cta_final at 0x00000216A3B198A0>
 
 <footer id="footer">
  <div class="footer-inner">

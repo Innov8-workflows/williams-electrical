@@ -1562,38 +1562,45 @@ section { position: relative; }
   </div>
   </div>
  </div>
- <form class="contact-form" onsubmit="return sendEmail(event)">
+ <form class="contact-form" action="https://api.web3forms.com/submit" method="POST">
+  <input type="hidden" name="access_key" value="REPLACE_WITH_WEB3FORMS_ACCESS_KEY">
+  <input type="hidden" name="subject" value="New Williams Electrical enquiry">
+  <input type="hidden" name="from_name" value="Williams Electrical Website">
+  <input type="hidden" name="redirect" value="https://williams-electric.co.uk/thanks.html">
   <h3>Send a message</h3>
-  <p>Sent direct to <a href="mailto:info@williamselectric.co.uk">info@williamselectric.co.uk</a> — usually replies within a few hours.</p>
+  <p>Goes straight to Alfie at <a href="mailto:info@williamselectric.co.uk">info@williamselectric.co.uk</a> — usually replies within a few hours.</p>
   <div class="form-row">
-  <div class="form-field"><label for="cf-fname">First name</label><input type="text" id="cf-fname" required></div>
-  <div class="form-field"><label for="cf-lname">Last name</label><input type="text" id="cf-lname"></div>
+   <div class="form-field"><label for="cf-fname">First name</label><input type="text" id="cf-fname" name="first_name" required></div>
+   <div class="form-field"><label for="cf-lname">Last name</label><input type="text" id="cf-lname" name="last_name"></div>
   </div>
   <div class="form-row">
-  <div class="form-field"><label for="cf-phone">Phone</label><input type="tel" id="cf-phone"></div>
-  <div class="form-field"><label for="cf-email">Email</label><input type="email" id="cf-email"></div>
+   <div class="form-field"><label for="cf-phone">Phone</label><input type="tel" id="cf-phone" name="phone"></div>
+   <div class="form-field"><label for="cf-email">Email</label><input type="email" id="cf-email" name="email" required></div>
   </div>
   <div class="form-single">
-  <div class="form-field"><label for="cf-service">Service needed</label>
-   <select id="cf-service">
-   <option value="">Select a service…</option>
-   <option>Consumer Unit Upgrade</option>
-   <option>Full / Partial Rewire</option>
-   <option>EV Charger Installation</option>
-   <option>Fault Finding &amp; Repair</option>
-   <option>New Sockets &amp; Lighting</option>
-   <option>EICR / Certificate</option>
-   <option>Solar &amp; Battery</option>
-   <option>Commercial Electrical</option>
-   <option>Other</option>
-   </select></div>
+   <div class="form-field"><label for="cf-service">Service needed</label>
+    <select id="cf-service" name="service">
+     <option value="">Select a service…</option>
+     <option>Consumer Unit Upgrade</option>
+     <option>Full / Partial Rewire</option>
+     <option>EV Charger Installation</option>
+     <option>Fault Finding &amp; Repair</option>
+     <option>New Sockets &amp; Lighting</option>
+     <option>EICR / Certificate</option>
+     <option>Solar &amp; Battery</option>
+     <option>Commercial Electrical</option>
+     <option>Other</option>
+    </select>
+   </div>
   </div>
   <div class="form-single">
-  <div class="form-field"><label for="cf-msg">Message</label><textarea id="cf-msg" placeholder="Tell Alfie about the job..."></textarea></div>
+   <div class="form-field"><label for="cf-msg">Message</label><textarea id="cf-msg" name="message" placeholder="Tell Alfie about the job..." required></textarea></div>
   </div>
+  <!-- Honeypot anti-spam — humans never see this, bots fill it in and get filtered -->
+  <input type="checkbox" name="botcheck" style="display:none !important;" tabindex="-1" autocomplete="off">
   <button type="submit" class="btn-submit">
-  Send via Email
-  <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2.9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+   Send message
+   <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
   </button>
  </form>
  </div>
@@ -1720,21 +1727,8 @@ function toggleAcc(btn) {
  }, 5000);
 });
 
-// Contact form → Email (opens user's email client with the form data pre-filled)
-function sendEmail(e) {
- e.preventDefault;
- const f = (id) => (document.getElementById(id).value || '').trim;
- const name = [f('cf-fname'), f('cf-lname')].filter(Boolean).join(' ');
- const subject = `Website enquiry from ${name || 'visitor'}`;
- const body =
- `Name: ${name || '-'}\n` +
- `Phone: ${f('cf-phone') || '-'}\n` +
- `Email: ${f('cf-email') || '-'}\n` +
- `Service: ${f('cf-service') || '-'}\n\n` +
- `Message:\n${f('cf-msg') || '-'}`;
- window.location.href = `mailto:info@williamselectric.co.uk?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
- return false;
-}
+// Contact form posts directly to Web3Forms via the form's action attribute
+// (no JS handler needed — visitor is redirected to /thanks.html on success)
 
 // Before/after sliders — drag/touch/keyboard
 (function  {
