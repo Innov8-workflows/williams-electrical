@@ -1068,16 +1068,16 @@ section { position: relative; }
   <a href="/about.html">About</a>
   <a href="/contact.html">Contact</a>
  </div>
- <button class="hamburger" onclick="toggleMenu" aria-label="Menu">
+ <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
   <span></span><span></span><span></span>
  </button>
  </div>
  <div class="mobile-menu" id="mobileMenu">
- <a href="/services/" onclick="toggleMenu">Services</a>
- <a href="/areas/" onclick="toggleMenu">Areas Covered</a>
- <a href="/work.html" onclick="toggleMenu">Our Work</a>
- <a href="/about.html" onclick="toggleMenu">About Alfie</a>
- <a href="/contact.html" onclick="toggleMenu">Contact</a>
+ <a href="/services/" onclick="toggleMenu()">Services</a>
+ <a href="/areas/" onclick="toggleMenu()">Areas Covered</a>
+ <a href="/work.html" onclick="toggleMenu()">Our Work</a>
+ <a href="/about.html" onclick="toggleMenu()">About Alfie</a>
+ <a href="/contact.html" onclick="toggleMenu()">Contact</a>
  <a href="tel:+447360528992">📞 07360 528992</a>
  </div>
 </nav>
@@ -1810,7 +1810,7 @@ function acceptCookies() {
 <!-- Cookie banner -->
 <div id="cookie-banner" class="cookie-banner" hidden>
  <p>This site uses essential cookies only — no tracking, no third-party analytics. <a href="/cookies.html">Read more</a>.</p>
- <button type="button" onclick="acceptCookies" class="cookie-btn">Got it</button>
+ <button type="button" onclick="acceptCookies()" class="cookie-btn">Got it</button>
 </div>
 
 </body>
