@@ -114,13 +114,15 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
 body {
  font-family: var(--font-body);
  color: var(--charcoal);
  background: var(--cream);
  line-height: 1.65;
  overflow-x: hidden;
+ width: 100%;
+ position: relative;
  -webkit-font-smoothing: antialiased;
 }
 img { max-width: 100%; display: block; }
@@ -364,6 +366,7 @@ section { position: relative; }
 /* ─── REVIEWS BAND (sage with angle cut top) ─── */
 #reviews {
  position: relative; background: var(--sage); padding: 110px 28px 100px;
+ overflow-x: hidden;
  color: var(--bone);
 }
 .angle-top.angle-bone { background: var(--bone); }
