@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leave a Review | Williams Electrical</title>
+<meta name="description" content="Loved the work? Leave a quick Google review for Williams Electrical — it takes about 30 seconds and means the world to a local business.">
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="https://williams-electric.co.uk/review.html">
+
+<!-- Open Graph (for clean preview cards when shared on WhatsApp / Messenger / Facebook) -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_GB">
+<meta property="og:site_name" content="Williams Electrical">
+<meta property="og:url" content="https://williams-electric.co.uk/review.html">
+<meta property="og:title" content="Leave a Review | Williams Electrical">
+<meta property="og:description" content="Loved the work? Leave a quick Google review for Williams Electrical — it takes about 30 seconds and means the world to a local business.">
+<meta property="og:image" content="https://williams-electric.co.uk/assets/img/hero-2.jpg">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="900">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Leave a Review | Williams Electrical">
+<meta name="twitter:description" content="Loved the work? Leave a quick Google review for Williams Electrical — it takes about 30 seconds and means the world to a local business.">
+<meta name="twitter:image" content="https://williams-electric.co.uk/assets/img/hero-2.jpg">
+
+<!-- Favicons -->
+<link rel="icon" type="image/svg+xml" href="/assets/img/favicons/favicon.svg">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicons/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicons/favicon-180.png">
+<link rel="manifest" href="/site.webmanifest">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/pages.css">
+
+<style>
+/* Slider hero — mirrors the homepage structure */
+#hero {
+  position: relative; min-height: 100vh; display: flex; align-items: center;
+  padding: 140px 28px 90px; overflow: hidden;
+  background: var(--cream);
+}
+.hero-slider {
+  position: absolute; inset: 0; z-index: 0; overflow: hidden;
+}
+.hero-slide {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; opacity: 0;
+  transition: opacity 1.4s ease-in-out;
+}
+.hero-slide.active { opacity: 1; }
+.hero-overlay {
+  position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(100deg,
+    rgba(247, 244, 237, 0.96) 0%,
+    rgba(247, 244, 237, 0.94) 38%,
+    rgba(247, 244, 237, 0.78) 50%,
+    rgba(247, 244, 237, 0.32) 70%,
+    rgba(247, 244, 237, 0.00) 95%);
+}
+.hero-inner {
+  position: relative; z-index: 2; max-width: 1180px; width: 100%; margin: 0 auto;
+  display: grid; grid-template-columns: minmax(0, 640px) 1fr; gap: 64px; align-items: center;
+}
+.hero-text-col { padding-right: 24px; }
+
+.review-pill {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--bone); border: 1px solid var(--line);
+  padding: 8px 16px 8px 12px; border-radius: var(--radius-pill);
+  font-size: 0.82rem; font-weight: 500; color: var(--sage-deeper);
+  margin-bottom: 28px;
+}
+.review-pill .stars-mini { display: inline-flex; gap: 1px; }
+.review-pill .stars-mini svg { width: 14px; height: 14px; }
+
+.hero-title {
+  font-family: var(--font-display); font-weight: 500;
+  font-size: clamp(2.4rem, 5.4vw, 4.2rem); line-height: 1.05;
+  color: var(--charcoal); letter-spacing: -0.02em; margin-bottom: 22px;
+}
+.hero-title em { font-style: italic; color: var(--sage-dark); font-weight: 500; }
+.hero-sub {
+  font-size: 1.08rem; color: var(--charcoal); max-width: 540px;
+  line-height: 1.7; margin-bottom: 36px;
+}
+
+.review-actions { display: flex; flex-direction: column; gap: 16px; max-width: 460px; }
+
+.btn-google {
+  display: inline-flex; align-items: center; justify-content: center; gap: 12px;
+  padding: 18px 32px; font-size: 1.05rem; font-weight: 600;
+  background: var(--sage-dark); color: var(--bone);
+  border-radius: var(--radius-pill); border: none; cursor: pointer;
+  transition: all 0.25s; text-decoration: none;
+  box-shadow: var(--shadow-sm);
+}
+.btn-google:hover {
+  background: var(--sage-deeper); transform: translateY(-2px); box-shadow: var(--shadow);
+}
+.btn-google .stars-row { display: inline-flex; gap: 2px; }
+.btn-google .stars-row svg { width: 18px; height: 18px; }
+.btn-google::after {
+  content: '→'; font-size: 1.2rem; opacity: 0.9; transition: transform 0.2s;
+}
+.btn-google:hover::after { transform: translateX(4px); }
+
+.btn-fb-link {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 0.92rem; color: var(--sage-dark); text-decoration: none;
+  align-self: flex-start; padding: 4px 0;
+  border-bottom: 1px solid transparent; transition: border-color 0.2s, color 0.2s;
+}
+.btn-fb-link:hover { color: var(--sage-deeper); border-bottom-color: var(--sage); }
+.btn-fb-link svg { width: 16px; height: 16px; }
+
+/* What to mention card */
+.what-to-mention {
+  background: var(--bone); border: 1px solid var(--line);
+  border-radius: 16px; padding: 24px 26px; margin-top: 40px; max-width: 460px;
+  box-shadow: var(--shadow-sm);
+}
+.what-to-mention h3 {
+  font-family: var(--font-display); font-weight: 500; font-size: 1.05rem;
+  color: var(--charcoal); margin-bottom: 12px;
+}
+.what-to-mention ul {
+  list-style: none; padding: 0; margin: 0;
+  font-size: 0.92rem; color: var(--muted); line-height: 1.7;
+}
+.what-to-mention li {
+  display: flex; align-items: flex-start; gap: 10px; margin-bottom: 6px;
+}
+.what-to-mention li::before {
+  content: '✓'; color: var(--sage-dark); font-weight: 700; flex-shrink: 0;
+}
+
+/* Hide the right column on smaller screens */
+@media (max-width: 1024px) {
+  .hero-inner { grid-template-columns: 1fr; gap: 32px; }
+  .hero-text-col { padding-right: 0; }
+}
+@media (max-width: 720px) {
+  #hero { padding: 130px 22px 70px; min-height: auto; }
+  .hero-title { font-size: 2.2rem; }
+  .hero-overlay {
+    background: linear-gradient(180deg, rgba(247,244,237,0.92) 0%, rgba(247,244,237,0.84) 70%, rgba(247,244,237,0.78) 100%);
+  }
+  .review-actions { max-width: none; }
+  .what-to-mention { max-width: none; }
+  .btn-google { padding: 16px 26px; font-size: 1rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <div class="nav-left">
+      <a href="tel:+447360528992" class="nav-call">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.01 2.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
+        07360 528992
+      </a>
+    </div>
+    <div class="nav-logo-wrap">
+      <a href="/index.html" aria-label="Williams Electrical home">
+        <img src="/assets/img/logo.webp" alt="Williams Electrical logo" class="nav-logo" width="120" height="54">
+      </a>
+    </div>
+    <div class="nav-links">
+      <a href="/services/">Services</a>
+      <a href="/areas/">Areas</a>
+      <a href="/work.html">Our Work</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="/services/">Services</a>
+    <a href="/areas/">Areas Covered</a>
+    <a href="/work.html">Our Work</a>
+    <a href="/about.html">About Alfie</a>
+    <a href="/contact.html">Contact</a>
+    <a href="tel:+447360528992">📞 07360 528992</a>
+  </div>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section id="hero">
+  <div class="hero-slider" aria-hidden="true">
+    <img src="/assets/img/hero-1.jpg" class="hero-slide active" alt="" loading="eager">
+    <img src="/assets/img/hero-2.jpg" class="hero-slide" alt="" loading="eager">
+    <img src="/assets/img/hero-3.jpg" class="hero-slide" alt="" loading="eager">
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-inner">
+    <div class="hero-text-col">
+      <div class="review-pill">
+        <span class="stars-mini" aria-label="5 out of 5">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#FBBC04" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#FBBC04" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#FBBC04" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#FBBC04" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#FBBC04" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </span>
+        Already trusted by 33+ customers on Google
+      </div>
+      <h1 class="hero-title">Loved the work?<br><em>Leave a review.</em></h1>
+      <p class="hero-sub">If Alfie did right by you, a quick Google review goes a long way for a local business — it takes about 30 seconds and genuinely helps the next person find us.</p>
+
+      <div class="review-actions">
+        <a href="#GOOGLE_REVIEW_LINK_HERE" target="_blank" rel="noopener" class="btn-google">
+          <span class="stars-row" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path fill="#FBBC04" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path fill="#FBBC04" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path fill="#FBBC04" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path fill="#FBBC04" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path fill="#FBBC04" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </span>
+          Leave a Google review
+        </a>
+
+        <a href="#FACEBOOK_REVIEW_LINK_HERE" target="_blank" rel="noopener" class="btn-fb-link">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+          Or leave a Facebook review →
+        </a>
+      </div>
+
+      <div class="what-to-mention">
+        <h3>Not sure what to say?</h3>
+        <ul>
+          <li>What we did — the job type</li>
+          <li>How the experience felt — communication, tidiness, timing</li>
+          <li>Anything that stood out, big or small</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER (slimmed down for this page) ─── -->
+<footer id="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="/assets/img/logo.webp" alt="Williams Electrical" width="120" height="56">
+        <p>Expert electrical services across Warwick and Warwickshire. Fully qualified and insured (£4m public liability), trusted by homeowners and businesses for over 9 years.</p>
+        <div class="footer-socials">
+          <a href="https://wa.me/447360528992" aria-label="WhatsApp" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8z"/></svg>
+          </a>
+          <a href="https://www.facebook.com/profile.php?id=61578182393162&locale=en_GB" aria-label="Facebook" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/_williamselectrical/" aria-label="Instagram" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <ul>
+          <li><a href="tel:+447360528992">07360 528992</a></li>
+          <li><a href="mailto:info@williamselectric.co.uk">info@williamselectric.co.uk</a></li>
+          <li>12 Ilex Court, Warwick, CV34 4PJ</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Quick links</h5>
+        <ul>
+          <li><a href="/services/">Services</a></li>
+          <li><a href="/areas/">Areas Covered</a></li>
+          <li><a href="/work.html">Our Work</a></li>
+          <li><a href="/contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Legal</h5>
+        <ul>
+          <li><a href="/privacy.html">Privacy Policy</a></li>
+          <li><a href="/cookies.html">Cookie Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Williams Electrical. All rights reserved.</p>
+    </div>
+    <p class="footer-credit">Made by <a href="https://innov8workflows.co.uk/index.html" target="_blank" rel="noopener">innov8workflows.co.uk</a></p>
+  </div>
+</footer>
+
+<script>
+// Hero image slider — crossfade every 5s
+(function () {
+  const slides = document.querySelectorAll(".hero-slide");
+  if (slides.length < 2) return;
+  let i = 0;
+  setInterval(() => {
+    slides[i].classList.remove("active");
+    i = (i + 1) % slides.length;
+    slides[i].classList.add("active");
+  }, 5000);
+})();
+
+// Sticky nav
+const nav = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 16);
+}, { passive: true });
+
+function toggleMenu() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+</script>
+</body>
+</html>
