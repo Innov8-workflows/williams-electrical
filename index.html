@@ -618,6 +618,10 @@ section { position: relative; }
  -webkit-overflow-scrolling: touch;
  scroll-behavior: smooth;
  scrollbar-width: none;
+ /* Only capture horizontal pans — release vertical gestures back to the page
+    so users can scroll past the carousel without getting stuck on mobile */
+ touch-action: pan-x pinch-zoom;
+ overscroll-behavior-x: contain;
  padding: 4px 0 8px;
  margin: 0;
  text-align: left;
