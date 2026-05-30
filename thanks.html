@@ -262,24 +262,24 @@
 
 <script>
 const nav = document.getElementById('navbar');
-window.addEventListener('scroll',  => nav.classList.toggle('scrolled', window.scrollY > 16), { passive: true });
-function toggleMenu { document.getElementById('mobileMenu').classList.toggle('open'); }
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 16), { passive: true });
+function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
 function toggleFaq(btn) { btn.parentElement.classList.toggle('open'); }
-function acceptCookies {
+function acceptCookies() {
  try { localStorage.setItem('we-cookies-ok', '1'); } catch(e) {}
  var b = document.getElementById('cookie-banner');
  if (b) { b.hidden = true; b.style.display = 'none'; }
 }
-(function {
+(function () {
  try {
  if (!localStorage.getItem('we-cookies-ok')) {
-  document.addEventListener('DOMContentLoaded', function {
+  document.addEventListener('DOMContentLoaded', function () {
   var b = document.getElementById('cookie-banner');
   if (b) b.hidden = false;
   });
  }
  } catch(e) {}
-});
+})();
 </script>
 </body>
 </html>
