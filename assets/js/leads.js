@@ -16,7 +16,9 @@
   "use strict";
 
   // Apps Script Web App URL (Deploy > New deployment > Web app).
-  var ENDPOINT = "__LEADS_ENDPOINT__";
+  // Project: "Williams Electrical - Lead Capture", bound to the
+  // "Williams Electrical Leads" sheet.
+  var ENDPOINT = "https://script.google.com/macros/s/AKfycbymjkeYx25wV7Wu-HfBfLkhCfSRkKP6F4BpzRoy-44_8vHiqWVJ4auXm20VhrG5BhqK/exec";
 
   // Not deployed yet? Do nothing rather than throwing on every page.
   if (!ENDPOINT || ENDPOINT.indexOf("script.google.com") === -1) return;
