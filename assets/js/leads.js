@@ -48,21 +48,30 @@
 
       var body = JSON.stringify(payload);
 
-      /* sendBeacon survives the page navigating away, which matters because
-         tel:, wa.me and the form POST all leave the page immediately.
-         text/plain keeps it a "simple" request, so no CORS preflight. */
-      if (navigator.sendBeacon) {
-        var blob = new Blob([body], { type: "text/plain;charset=UTF-8" });
-        if (navigator.sendBeacon(ENDPOINT, blob)) return;
+      /* Deliberately fetch + keepalive rather than navigator.sendBeacon.
+         Apps Script answers /exec with a 302 to script.googleusercontent.com,
+         and sendBeacon does not survive that cross-origin redirect — it drops
+         the request while still returning true, so failures are silent.
+         Verified against the live endpoint: beacon never arrived, this did.
+
+         mode:"no-cors"  - we don't need to read the reply, just deliver it
+         keepalive:true  - survives the page unloading, same as sendBeacon
+         text/plain      - a "simple" request, so no CORS preflight */
+      if (typeof fetch === "function") {
+        fetch(ENDPOINT, {
+          method: "POST",
+          mode: "no-cors",
+          keepalive: true,
+          headers: { "Content-Type": "text/plain;charset=UTF-8" },
+          body: body
+        })["catch"](function () { /* never break the page */ });
+        return;
       }
 
-      fetch(ENDPOINT, {
-        method: "POST",
-        mode: "no-cors",
-        keepalive: true,
-        headers: { "Content-Type": "text/plain;charset=UTF-8" },
-        body: body
-      })["catch"](function () { /* never break the page */ });
+      // Last resort for browsers with no fetch at all.
+      if (navigator.sendBeacon) {
+        navigator.sendBeacon(ENDPOINT, new Blob([body], { type: "text/plain;charset=UTF-8" }));
+      }
     } catch (err) { /* never break the page */ }
   }
 
