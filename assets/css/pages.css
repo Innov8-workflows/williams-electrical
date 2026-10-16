@@ -1,4 +1,4 @@
-/* Williams Electrical — shared stylesheet for all sub-pages */
+
 :root {
   --cream:        #F7F4ED;
   --cream-soft:   #FBF9F4;
@@ -33,7 +33,6 @@ a { text-decoration: none; color: inherit; }
 ul, ol { list-style: none; }
 button { font-family: inherit; cursor: pointer; border: none; background: none; }
 
-/* ─── NAV ─── */
 #navbar {
   position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
   background: rgba(247, 244, 237, 0.85);
@@ -81,7 +80,6 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .mobile-menu a:last-child { border: none; }
 .mobile-menu.open { display: flex; }
 
-/* ─── BUTTONS ─── */
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 10px;
   padding: 14px 28px; font-size: 0.95rem; font-weight: 600;
@@ -94,7 +92,6 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .btn-outline { background: transparent; color: var(--sage-deeper); border-color: var(--sage); }
 .btn-outline:hover { background: var(--sage); color: var(--bone); border-color: var(--sage); }
 
-/* ─── SUB-PAGE HERO ─── */
 .page-hero {
   position: relative; padding: 160px 28px 80px;
   background: linear-gradient(180deg, var(--cream) 0%, var(--cream-soft) 100%);
@@ -126,7 +123,6 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 .page-hero-actions { display: flex; flex-wrap: wrap; gap: 14px; }
 
-/* ─── SECTION FRAME ─── */
 section { position: relative; }
 .section-inner { max-width: 1180px; margin: 0 auto; padding: 80px 28px; }
 .eyebrow {
@@ -143,7 +139,6 @@ section { position: relative; }
 .section-title em { font-style: italic; color: var(--sage-dark); font-weight: 500; }
 .section-sub { font-size: 1.05rem; color: var(--muted); max-width: 680px; line-height: 1.7; }
 
-/* ─── PROSE (article body) ─── */
 .prose { max-width: 760px; }
 .prose h2 {
   font-family: var(--font-display); font-weight: 500;
@@ -169,7 +164,6 @@ section { position: relative; }
   margin: 28px 0; font-style: italic; color: var(--sage-deeper);
 }
 
-/* ─── TWO-COLUMN BODY LAYOUT (article + sidebar) ─── */
 .body-layout {
   display: grid; grid-template-columns: minmax(0, 1fr) 320px;
   gap: 64px; align-items: start;
@@ -194,7 +188,6 @@ section { position: relative; }
   background: var(--sage-pale); color: var(--sage-deeper);
 }
 
-/* ─── GRID CARDS (service/area tiles) ─── */
 .grid-cards {
   display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 20px;
@@ -221,7 +214,6 @@ section { position: relative; }
 .card-link::after { content: '→'; transition: transform 0.2s; }
 .card:hover .card-link::after { transform: translateX(4px); }
 
-/* ─── FAQ ─── */
 .faq-list { border-top: 1px solid var(--line); }
 .faq-item { border-bottom: 1px solid var(--line); }
 .faq-q {
@@ -242,7 +234,6 @@ section { position: relative; }
 .faq-item.open .faq-a { max-height: 380px; padding: 0 4px 24px; }
 .faq-a p { font-size: 0.95rem; color: var(--muted); line-height: 1.75; }
 
-/* ─── CTA SECTION ─── */
 .cta-final {
   position: relative; overflow: hidden;
   padding: 100px 28px; text-align: center;
@@ -275,7 +266,6 @@ section { position: relative; }
 .cta-final-actions .btn-outline { border-color: rgba(255,255,255,0.5); color: var(--bone); }
 .cta-final-actions .btn-outline:hover { background: var(--bone); color: var(--sage-deeper); border-color: var(--bone); }
 
-/* ─── FOOTER ─── */
 #footer { background: var(--charcoal); color: rgba(255,255,255,0.7); padding: 70px 28px 32px; }
 .footer-inner { max-width: 1180px; margin: 0 auto; }
 .footer-top {
@@ -303,7 +293,6 @@ section { position: relative; }
   font-size: 0.82rem; color: rgba(255,255,255,0.5); flex-wrap: wrap; gap: 12px;
 }
 
-/* ─── FEATURED CASE STUDIES (work page) ─── */
 .case-study {
   display: grid; grid-template-columns: 1.1fr 1fr; gap: 48px; align-items: center;
   margin-bottom: 80px;
@@ -355,8 +344,6 @@ section { position: relative; }
   .case-study.case-study-reverse .case-study-body { order: 0; }
 }
 
-/* Reuse work-page BA + gallery grids — these classes are defined inline on the
-   homepage but the work page links to pages.css, so duplicate the key rules: */
 .ba-grid {
   display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px;
 }
@@ -435,7 +422,7 @@ section { position: relative; }
   .ba-grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 720px) {
-  /* Gallery tiles: hide sub-caption + tighter gradient so the image breathes */
+
   .gallery-tile::after {
     background: linear-gradient(to top, rgba(20,28,22,0.78) 0%, rgba(20,28,22,0.3) 30%, transparent 50%);
   }
@@ -448,7 +435,6 @@ section { position: relative; }
   .gallery-tile { flex: 1 1 calc(50% - 9px); min-width: 0; }
 }
 
-/* ─── COOKIE BANNER ─── */
 .cookie-banner {
   position: fixed; left: 16px; right: 16px; bottom: 16px; z-index: 9999;
   max-width: 720px; margin: 0 auto;
@@ -475,7 +461,6 @@ section { position: relative; }
   .cookie-btn { width: 100%; }
 }
 
-/* ─── FOOTER POLICY LINKS ─── */
 .footer-policies {
   display: flex; gap: 8px; flex-wrap: wrap; align-items: center;
   font-size: 0.82rem;
@@ -486,7 +471,6 @@ section { position: relative; }
 .footer-policies a:hover { color: var(--gold-soft); }
 .footer-policies span { color: rgba(255,255,255,0.3); }
 
-/* ─── FOOTER CREDIT (Made by …) ─── */
 .footer-credit {
   text-align: center; margin-top: 18px; padding-top: 18px;
   border-top: 1px solid rgba(255,255,255,0.06);
@@ -499,7 +483,6 @@ section { position: relative; }
 }
 .footer-credit a:hover { color: var(--gold-soft); border-bottom-color: var(--gold-soft); }
 
-/* ─── FLOATING ACTIONS ─── */
 .float-actions {
   position: fixed; right: 22px; bottom: 22px; z-index: 999;
   display: flex; flex-direction: column; gap: 12px;
@@ -515,7 +498,6 @@ section { position: relative; }
 .float-call { background: var(--sage-dark); }
 .float-call svg { width: 22px; height: 22px; stroke: var(--bone); fill: none; stroke-width: 2; }
 
-/* ─── CONTACT FORM (used on contact + service/area pages) ─── */
 .contact-form {
   background: var(--bone); border-radius: 22px; padding: 36px;
   box-shadow: var(--shadow-lg); max-width: 580px; margin: 0 auto;
@@ -543,7 +525,7 @@ section { position: relative; }
   outline: none; border-color: var(--sage-dark); background: var(--bone);
   box-shadow: 0 0 0 3px rgba(138, 163, 142, 0.18);
 }
-/* Override Chrome/Safari autofill yellow/white background */
+
 .form-field input:-webkit-autofill,
 .form-field input:-webkit-autofill:hover,
 .form-field input:-webkit-autofill:focus {
@@ -563,7 +545,6 @@ section { position: relative; }
 .btn-submit:hover { background: var(--sage-dark); }
 .btn-submit svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; }
 
-/* ─── AREA PILLS ─── */
 .areas-pills {
   display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px;
 }
@@ -576,7 +557,6 @@ section { position: relative; }
 .area-pill svg { width: 13px; height: 13px; stroke: var(--sage-dark); fill: none; stroke-width: 2; }
 .area-pill:hover { background: var(--sage-pale); border-color: var(--sage); }
 
-/* ─── RESPONSIVE ─── */
 @media (max-width: 1024px) {
   .body-layout { grid-template-columns: 1fr; gap: 40px; }
   .sidebar { position: static; }

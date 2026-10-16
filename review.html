@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html lang="en-GB">
 <head>
-<!-- Google tag (gtag.js) -->
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'none'; object-src 'none'; frame-src 'none'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://crm.innov8workflows.co.uk; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://www.google-analytics.com https://www.googletagmanager.com; media-src 'self' data:; connect-src 'self' https://script.google.com https://script.googleusercontent.com https://www.google-analytics.com https://region1.google-analytics.com https://analytics.google.com https://www.googletagmanager.com https://crm.innov8workflows.co.uk; form-action 'self' https://api.web3forms.com; manifest-src 'self'; worker-src 'none'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z7KN2ZK7LP"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -9,14 +12,13 @@
   gtag('js', new Date());
   gtag('config', 'G-Z7KN2ZK7LP');
 </script>
-<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Leave a Review | Williams Electrical</title>
 <meta name="description" content="Loved the work? Leave a quick Google review for Williams Electrical — it takes about 30 seconds and means the world to a local business.">
 <meta name="robots" content="noindex, follow">
 <link rel="canonical" href="https://williams-electric.co.uk/review.html">
 
-<!-- Open Graph (for clean preview cards when shared on WhatsApp / Messenger / Facebook) -->
+
 <meta property="og:type" content="website">
 <meta property="og:locale" content="en_GB">
 <meta property="og:site_name" content="Williams Electrical">
@@ -27,13 +29,13 @@
 <meta property="og:image:width" content="1600">
 <meta property="og:image:height" content="900">
 
-<!-- Twitter -->
+
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Leave a Review | Williams Electrical">
 <meta name="twitter:description" content="Loved the work? Leave a quick Google review for Williams Electrical — it takes about 30 seconds and means the world to a local business.">
 <meta name="twitter:image" content="https://williams-electric.co.uk/assets/img/hero-2.jpg">
 
-<!-- Favicons -->
+
 <link rel="icon" type="image/svg+xml" href="/assets/img/favicons/favicon.svg">
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicons/favicon-32.png">
@@ -46,7 +48,7 @@
 <link rel="stylesheet" href="/assets/css/pages.css">
 
 <style>
-/* Slider hero — mirrors the homepage structure */
+
 #hero {
   position: relative; min-height: 100vh; display: flex; align-items: center;
   padding: 140px 28px 90px; overflow: hidden;
@@ -126,7 +128,7 @@
 .btn-fb-link:hover { color: var(--sage-deeper); border-bottom-color: var(--sage); }
 .btn-fb-link svg { width: 16px; height: 16px; }
 
-/* What to mention card */
+
 .what-to-mention {
   background: var(--bone); border: 1px solid var(--line);
   border-radius: 16px; padding: 24px 26px; margin-top: 40px; max-width: 460px;
@@ -147,7 +149,7 @@
   content: '✓'; color: var(--sage-dark); font-weight: 700; flex-shrink: 0;
 }
 
-/* Hide the right column on smaller screens */
+
 @media (max-width: 1024px) {
   .hero-inner { grid-template-columns: 1fr; gap: 32px; }
   .hero-text-col { padding-right: 0; }
@@ -166,7 +168,7 @@
 </head>
 <body>
 
-<!-- ─── NAV ─── -->
+
 <nav id="navbar">
   <div class="nav-inner">
     <div class="nav-left">
@@ -201,7 +203,7 @@
   </div>
 </nav>
 
-<!-- ─── HERO ─── -->
+
 <section id="hero">
   <div class="hero-slider" aria-hidden="true">
     <img src="/assets/img/hero-1.jpg" class="hero-slide active" alt="" loading="eager">
@@ -254,7 +256,7 @@
   </div>
 </section>
 
-<!-- ─── FOOTER (slimmed down for this page) ─── -->
+
 <footer id="footer">
   <div class="footer-inner">
     <div class="footer-top">
@@ -306,7 +308,7 @@
 </footer>
 
 <script>
-// Hero image slider — crossfade every 5s
+
 (function () {
   const slides = document.querySelectorAll(".hero-slide");
   if (slides.length < 2) return;
@@ -318,7 +320,7 @@
   }, 5000);
 })();
 
-// Sticky nav
+
 const nav = document.getElementById('navbar');
 window.addEventListener('scroll', () => {
   nav.classList.toggle('scrolled', window.scrollY > 16);

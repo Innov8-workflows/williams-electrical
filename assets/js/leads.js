@@ -1,30 +1,12 @@
-/*
- * Williams Electrical — lead capture
- * Built by Innov8 Workflows.
- *
- * Sends three kinds of lead to the Google Apps Script endpoint, which logs
- * them to the "Williams Electrical Leads" sheet and emails a notification:
- *
- *   1. Contact form submissions  (type: "Contact form")
- *   2. WhatsApp widget / link clicks (type: "WhatsApp")
- *   3. Click-to-call taps        (type: "Phone call")
- *
- * The contact form still POSTs to Web3Forms as before, so Alfie keeps
- * receiving his own email — this runs alongside it, it does not replace it.
- */
+
+
 (function () {
   "use strict";
 
-  // Apps Script Web App URL (Deploy > New deployment > Web app).
-  // Project: "Williams Electrical - Lead Capture", bound to the
-  // "Williams Electrical Leads" sheet.
   var ENDPOINT = "https://script.google.com/macros/s/AKfycbymjkeYx25wV7Wu-HfBfLkhCfSRkKP6F4BpzRoy-44_8vHiqWVJ4auXm20VhrG5BhqK/exec";
 
-  // Not deployed yet? Do nothing rather than throwing on every page.
   if (!ENDPOINT || ENDPOINT.indexOf("script.google.com") === -1) return;
 
-  /* Session-scoped visitor id, used server-side to collapse duplicate
-     call/WhatsApp taps from the same person within 10 minutes. */
   function clientId() {
     try {
       var k = "we-cid";
@@ -48,15 +30,6 @@
 
       var body = JSON.stringify(payload);
 
-      /* Deliberately fetch + keepalive rather than navigator.sendBeacon.
-         Apps Script answers /exec with a 302 to script.googleusercontent.com,
-         and sendBeacon does not survive that cross-origin redirect — it drops
-         the request while still returning true, so failures are silent.
-         Verified against the live endpoint: beacon never arrived, this did.
-
-         mode:"no-cors"  - we don't need to read the reply, just deliver it
-         keepalive:true  - survives the page unloading, same as sendBeacon
-         text/plain      - a "simple" request, so no CORS preflight */
       if (typeof fetch === "function") {
         fetch(ENDPOINT, {
           method: "POST",
@@ -64,19 +37,16 @@
           keepalive: true,
           headers: { "Content-Type": "text/plain;charset=UTF-8" },
           body: body
-        })["catch"](function () { /* never break the page */ });
+        })["catch"](function () {   });
         return;
       }
 
-      // Last resort for browsers with no fetch at all.
       if (navigator.sendBeacon) {
         navigator.sendBeacon(ENDPOINT, new Blob([body], { type: "text/plain;charset=UTF-8" }));
       }
-    } catch (err) { /* never break the page */ }
+    } catch (err) {   }
   }
 
-  /* 1) Call + WhatsApp clicks — one delegated listener covers every link,
-        including the floating widgets and anything added later. */
   document.addEventListener("click", function (e) {
     var el = e.target;
     if (!el || typeof el.closest !== "function") return;
@@ -93,8 +63,6 @@
     }
   }, true);
 
-  /* 2) Contact form — fires on submit, just before the native POST to
-        Web3Forms carries the visitor off to /thanks.html. */
   function wireForms() {
     var forms = document.querySelectorAll("form.contact-form");
     for (var i = 0; i < forms.length; i++) {
@@ -107,12 +75,12 @@
           try {
             var fd = new FormData(form);
             fd.forEach(function (value, key) {
-              // Skip Web3Forms plumbing — it is not lead data.
+
               if (key === "access_key" || key === "redirect" ||
                   key === "subject" || key === "from_name") return;
               data[key] = value;
             });
-          } catch (err) { /* still send what we have */ }
+          } catch (err) {   }
           send(data);
         });
       })(forms[i]);

@@ -26,6 +26,31 @@ ROOT = Path(__file__).parent
 # Google Analytics 4 measurement ID (kept here so a rebuild never drops the tag)
 GA4_ID = "G-Z7KN2ZK7LP"
 
+# innov8 CRM visitor tracking id (feeds the client dashboard)
+CRM_TRACK_ID = "proj_1a830345d884"
+
+# Content Security Policy, served as a meta tag (GitHub Pages cannot set headers).
+# connect-src needs BOTH Apps Script hosts: /exec 302s to script.googleusercontent.com,
+# and without it the lead beacon is silently refused. Web3Forms is a native form POST,
+# so it belongs in form-action. manifest-src is 'self' because the site ships a webmanifest.
+CSP = (
+ "default-src 'self'; base-uri 'none'; object-src 'none'; frame-src 'none'; "
+ "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://crm.innov8workflows.co.uk; "
+ "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; "
+ "font-src 'self' https://fonts.gstatic.com; "
+ "img-src 'self' data: https://www.google-analytics.com https://www.googletagmanager.com; "
+ "media-src 'self' data:; "
+ "connect-src 'self' https://script.google.com https://script.googleusercontent.com "
+ "https://www.google-analytics.com https://region1.google-analytics.com "
+ "https://analytics.google.com https://www.googletagmanager.com https://crm.innov8workflows.co.uk; "
+ "form-action 'self' https://api.web3forms.com; "
+ "manifest-src 'self'; worker-src 'none'; upgrade-insecure-requests"
+)
+SECURITY_META = (
+ f'<meta http-equiv="Content-Security-Policy" content="{CSP}">\n'
+ '<meta name="referrer" content="strict-origin-when-cross-origin">'
+)
+
 # ──────────────────────────────────────────
 # Shared SVGs / icons
 # ──────────────────────────────────────────
@@ -100,7 +125,8 @@ def head(title, desc, canonical_path, og_image_path="/assets/img/hero-2.jpg", sc
  return f"""<!DOCTYPE html>
 <html lang="en-GB">
 <head>
-<!-- Google tag (gtag.js) -->
+<meta charset="UTF-8">
+{SECURITY_META}
 <script async src="https://www.googletagmanager.com/gtag/js?id={GA4_ID}"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -108,7 +134,6 @@ def head(title, desc, canonical_path, og_image_path="/assets/img/hero-2.jpg", sc
   gtag('js', new Date());
   gtag('config', '{GA4_ID}');
 </script>
-<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{title}</title>
 <meta name="description" content="{desc}">
@@ -298,6 +323,7 @@ function acceptCookies() {{
 <!-- GA4 conversion tracking + lead capture to Google Sheet -->
 <script defer src="{prefix}assets/js/tracking.js"></script>
 <script defer src="{prefix}assets/js/leads.js"></script>
+<script defer src="https://crm.innov8workflows.co.uk/track.js" data-id="{CRM_TRACK_ID}"></script>
 </body>
 </html>"""
 
@@ -1344,6 +1370,13 @@ def main():
  written += 1
 
  print(f"\n✓ {written} files written")
+
+ # Everything served is public, so no developer comment may ship. This strips every
+ # published page, including the hand-maintained ones (index.html, review pages, assets/js).
+ import subprocess
+ result = subprocess.run(["node", str(ROOT / "_tools" / "strip_published.js")], cwd=ROOT)
+ if result.returncode != 0:
+  sys.exit("comment strip reported problems - fix before publishing")
 
 
 if __name__ == "__main__":
