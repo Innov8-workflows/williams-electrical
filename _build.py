@@ -23,8 +23,14 @@ from _data import (
 sys.stdout.reconfigure(encoding="utf-8")
 ROOT = Path(__file__).parent
 
-# Google Analytics 4 measurement ID (kept here so a rebuild never drops the tag)
+# Google Analytics 4 measurement ID. It lives in assets/js/consent.js, which loads GA
+# only after the visitor presses Accept (UK PECR). Never put Google's gtag snippet in a
+# page: it sets _ga cookies before any choice.
 GA4_ID = "G-Z7KN2ZK7LP"
+CONSENT_JS = ROOT / "assets" / "js" / "consent.js"
+if GA4_ID not in CONSENT_JS.read_text(encoding="utf-8"):
+ sys.exit("assets/js/consent.js does not carry GA4_ID " + GA4_ID)
+CONSENT_V = __import__("hashlib").md5(CONSENT_JS.read_bytes()).hexdigest()[:8]
 
 # innov8 CRM visitor tracking id (feeds the client dashboard)
 CRM_TRACK_ID = "proj_1a830345d884"
@@ -127,13 +133,7 @@ def head(title, desc, canonical_path, og_image_path="/assets/img/hero-2.jpg", sc
 <head>
 <meta charset="UTF-8">
 {SECURITY_META}
-<script async src="https://www.googletagmanager.com/gtag/js?id={GA4_ID}"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){{dataLayer.push(arguments);}}
-  gtag('js', new Date());
-  gtag('config', '{GA4_ID}');
-</script>
+<script src="{prefix}assets/js/consent.js?v={CONSENT_V}"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{title}</title>
 <meta name="description" content="{desc}">
@@ -292,32 +292,11 @@ def footer(depth=0):
  <a href="tel:{BIZ_PHONE}" class="float-btn float-call" aria-label="Call {BIZ_NAME}">{ICON_PHONE}</a>
 </div>
 
-<!-- Cookie banner (essential cookies only, dismissed via localStorage) -->
-<div id="cookie-banner" class="cookie-banner" hidden>
- <p>This site uses essential cookies only — no tracking, no third-party analytics. <a href="{prefix}cookies.html">Read more</a>.</p>
- <button type="button" onclick="acceptCookies()" class="cookie-btn">Got it</button>
-</div>
-
 <script>
 const nav = document.getElementById('navbar');
 window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 16), {{ passive: true }});
 function toggleMenu() {{ document.getElementById('mobileMenu').classList.toggle('open'); }}
 function toggleFaq(btn) {{ btn.parentElement.classList.toggle('open'); }}
-function acceptCookies() {{
- try {{ localStorage.setItem('we-cookies-ok', '1'); }} catch(e) {{}}
- var b = document.getElementById('cookie-banner');
- if (b) {{ b.hidden = true; b.style.display = 'none'; }}
-}}
-(function () {{
- try {{
- if (!localStorage.getItem('we-cookies-ok')) {{
-  document.addEventListener('DOMContentLoaded', function () {{
-  var b = document.getElementById('cookie-banner');
-  if (b) b.hidden = false;
-  }});
- }}
- }} catch(e) {{}}
-}})();
 </script>
 
 <!-- GA4 conversion tracking + lead capture to Google Sheet -->
@@ -1105,7 +1084,7 @@ def render_privacy():
  bc = breadcrumbs([("Home", "index.html"), ("Privacy Policy", "")], depth=0)
  page_head = head(
   title=f"Privacy Policy | {BIZ_NAME}",
-  desc=f"How {BIZ_NAME} collects, uses and protects your personal data. UK GDPR-compliant. Contact form data, no third-party tracking.",
+  desc=f"How {BIZ_NAME} collects, uses and protects your personal data. UK GDPR-compliant. Contact form data, and Google Analytics only if you accept cookies.",
   canonical_path="/privacy.html",
   depth=0,
  )
@@ -1127,7 +1106,7 @@ def render_privacy():
  <p>If you have any questions about this policy or how we handle your data, contact us at <a href="mailto:{BIZ_EMAIL}">{BIZ_EMAIL}</a> or call <a href="tel:{BIZ_PHONE}">{BIZ_PHONE_DISPLAY}</a>.</p>
 
  <h2>What information we collect</h2>
- <p>We only collect information that you actively provide to us — we do not run any third-party analytics or tracking. When you complete our contact form or message us via WhatsApp, we collect:</p>
+ <p>We collect the information you choose to give us. When you complete our contact form or message us via WhatsApp, we collect:</p>
  <ul>
   <li>Your name (first name, optionally surname)</li>
   <li>Your phone number (if provided)</li>
@@ -1173,7 +1152,7 @@ def render_privacy():
  <p>To exercise any of these rights, email <a href="mailto:{BIZ_EMAIL}">{BIZ_EMAIL}</a>. We aim to respond within 14 days. If you're unhappy with how we've handled your data, you can complain to the Information Commissioner's Office at <a href="https://ico.org.uk/" target="_blank" rel="noopener">ico.org.uk</a>.</p>
 
  <h2>Cookies</h2>
- <p>We use essential cookies only. We do not run any third-party analytics (no Google Analytics, no Facebook Pixel, no advertising trackers). See our <a href="./cookies.html">Cookie Policy</a> for full detail.</p>
+ <p>We use Google Analytics to see how people find and use this site, but only if you press Accept on the cookie banner. If you decline, or make no choice, no analytics cookies are set. We don't use the Facebook Pixel or any advertising trackers. See our <a href="./cookies.html">Cookie Policy</a> for full detail, and to change your choice.</p>
 
  <h2>Changes to this policy</h2>
  <p>We may update this policy from time to time. The "last updated" date at the top of this page will reflect any changes. Material changes will be highlighted on the homepage.</p>
@@ -1188,7 +1167,7 @@ def render_cookies():
  bc = breadcrumbs([("Home", "index.html"), ("Cookie Policy", "")], depth=0)
  page_head = head(
   title=f"Cookie Policy | {BIZ_NAME}",
-  desc=f"{BIZ_NAME} uses essential cookies only. No Google Analytics, no advertising trackers, no third-party tracking. Read our full cookie policy.",
+  desc=f"The cookies {BIZ_NAME} uses: Google Analytics, only if you accept. No advertising trackers. How to change your choice.",
   canonical_path="/cookies.html",
   depth=0,
  )
@@ -1199,42 +1178,44 @@ def render_cookies():
  <div class="page-hero-inner">
  {bc}
  <h1>Cookie Policy</h1>
- <p class="lead">What cookies we use, why, and how to control them. Last updated 1 May 2026.</p>
+ <p class="lead">What cookies we use, why, and how to control them. Last updated 29 October 2026.</p>
  </div>
 </section>
 
 <section class="section-inner">
  <div class="prose" style="margin:0 auto;">
  <h2>The short version</h2>
- <p><strong>We don't track you.</strong> This site uses no Google Analytics, no Facebook Pixel, no advertising cookies, no fingerprinting, no third-party tracking of any kind. The only cookies set are essential ones described below.</p>
+ <p>We use Google Analytics to see how people find and use this site, but <strong>only if you press Accept</strong> on the cookie banner. If you decline, or don't choose, no analytics cookies are set and nothing is sent to Google. We don't use the Facebook Pixel, advertising cookies or any other tracking.</p>
+ <p><a href="#" data-cookie-settings>Change your cookie choice</a></p>
 
  <h2>What is a cookie?</h2>
- <p>A cookie is a small text file that a website stores on your device. Some cookies are essential for a site to function; others are used for analytics, advertising, or personalisation. UK and EU law require websites to inform you about cookies and, where they're not strictly necessary, get your consent before setting them.</p>
+ <p>A cookie is a small text file that a website stores on your device. Some are needed for a site to work. Others are used for analytics, advertising or personalisation. UK law says a website must tell you about cookies and, where they aren't strictly necessary, ask your permission before setting them.</p>
 
  <h2>Cookies we use</h2>
- <h3>Essential cookies</h3>
+ <h3>Analytics cookies, only if you accept</h3>
  <ul>
-  <li><strong><code>we-cookies-ok</code></strong> — set by us when you dismiss the cookie banner. Stored in your browser's localStorage (technically not a cookie, but covered here for transparency). It records that you've seen the banner so we don't show it on every page. Contains a single value: "1". No personal data.</li>
- </ul>
- <p>That's the only thing we set.</p>
-
- <h3>Third-party cookies</h3>
- <p>None. We don't embed Google Maps, YouTube, Facebook widgets, or any other third-party content that would set cookies on your visit.</p>
-
- <h3>What about WhatsApp / Google reviews?</h3>
- <p>When you click a WhatsApp link or our "Read all reviews on Google" link, you'll be taken to those services and they may set their own cookies. We don't control or share data with those services beyond the click itself. Their own privacy and cookie policies apply once you're on their sites.</p>
-
- <h2>How to control cookies</h2>
- <p>Because we only use essential cookies, you don't need to take any action to opt out. If you want to clear what's stored anyway, use your browser's privacy settings:</p>
- <ul>
-  <li><strong>Chrome:</strong> Settings → Privacy &amp; security → Clear browsing data</li>
-  <li><strong>Safari:</strong> Settings → Safari → Clear History and Website Data</li>
-  <li><strong>Firefox:</strong> Settings → Privacy &amp; Security → Clear Data</li>
-  <li><strong>Edge:</strong> Settings → Privacy, search and services → Clear browsing data</li>
+  <li><strong><code>_ga</code></strong> and <strong><code>_ga_Z7KN2ZK7LP</code></strong>: set by Google Analytics. They tell visits apart, so we can see how many people visit, which pages they look at and whether they tap to call us. They last up to 2 years. Google processes this data for us under its own <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">privacy policy</a>.</li>
  </ul>
 
- <h2>Will this ever change?</h2>
- <p>If we add anything in future — for example, a map embed, an analytics tool, or chat widget — we'll update this policy and the cookie banner will reappear so you can re-consent.</p>
+ <h3>Your choice</h3>
+ <ul>
+  <li><strong><code>we-consent</code></strong>: stored in your browser's local storage (not strictly a cookie, but listed here so you know). It remembers whether you pressed Accept or Decline, so we don't ask on every page. It holds one word, "granted" or "denied", and no personal data.</li>
+ </ul>
+
+ <h3>Visit counter</h3>
+ <p>We also count page visits and taps on our phone and WhatsApp buttons with a simple counter run by Innov8 Workflows, who look after this website for us. It sets no cookies, stores nothing on your device and doesn't identify you.</p>
+
+ <h3>What about WhatsApp and Google reviews?</h3>
+ <p>When you tap a WhatsApp link or our "Read all reviews on Google" link, you're taken to those services and they may set their own cookies. Their own privacy and cookie policies apply once you're on their sites.</p>
+
+ <h2>How to change your choice</h2>
+ <p>Use the <a href="#" data-cookie-settings>change your cookie choice</a> link on this page at any time. If you change to Decline, we delete the Google Analytics cookies from your browser. You can also clear cookies in your browser's settings:</p>
+ <ul>
+  <li><strong>Chrome:</strong> Settings, Privacy and security, Delete browsing data</li>
+  <li><strong>Safari:</strong> Settings, Safari, Clear History and Website Data</li>
+  <li><strong>Firefox:</strong> Settings, Privacy and Security, Clear Data</li>
+  <li><strong>Edge:</strong> Settings, Privacy, search and services, Clear browsing data</li>
+ </ul>
 
  <h2>Contact</h2>
  <p>Questions? Email <a href="mailto:{BIZ_EMAIL}">{BIZ_EMAIL}</a> or call <a href="tel:{BIZ_PHONE}">{BIZ_PHONE_DISPLAY}</a>.</p>
@@ -1368,6 +1349,15 @@ def main():
  (ROOT / "robots.txt").write_text(render_robots(), encoding="utf-8")
  print(" wrote robots.txt")
  written += 1
+
+ # The homepage is hand-maintained: keep its consent tag on the current file version.
+ home = ROOT / "index.html"
+ h = home.read_text(encoding="utf-8")
+ h2, n = re.subn(r"/assets/js/consent\.js\?v=[0-9a-f]+", f"/assets/js/consent.js?v={CONSENT_V}", h)
+ if n != 1 or "googletagmanager.com/gtag/js" in h2:
+  sys.exit("index.html must load consent.js exactly once and carry no gtag snippet")
+ if h2 != h:
+  home.write_text(h2, encoding="utf-8")
 
  print(f"\n✓ {written} files written")
 
